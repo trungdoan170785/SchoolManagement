@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Nhân viên')}">
+
+<section>
+
+  <div class="d-flex justify-content-between mb-3">
+    <h4>Danh sách nhân sự</h4>
+    <a class="btn btn-primary" th:href="@{/staffs/create}">
+      + Thêm mới
+    </a>
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Họ tên</th>
+      <th>Email</th>
+      <th>Vị trí</th>
+      <th>Phone</th>
+      <th width="140">Hành động</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="s : ${staffs}">
+      <td th:text="${s.fullName}">Name</td>
+      <td th:text="${s.email}">Email</td>
+      <td th:text="${s.position}">Position</td>
+      <td th:text="${s.phone}">Phone</td>
+
+      <td>
+        <a class="btn btn-sm btn-warning"
+           th:href="@{'/staffs/edit/' + ${s.id}}">
+          <b class="fas fa-edit">Edit</b>
+        </a>
+
+        <a class="btn btn-sm btn-danger"
+           th:href="@{'/staffs/delete/' + ${s.id}}"
+           onclick="return confirm('Xóa nhân sự này?')">
+          <b class="fas fa-edit">Delete</b>
+
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</section>
+
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Users')}">
+
+<section>
+  <h4>Tạo tài khoản: </h4>
+  <form method="post" action="/users/create-from-email">
+
+    <div class="mb-3">
+      <label>Email (username)</label>
+      <input class="form-control" name="username" th:value="${user.username}" readonly>
+    </div>
+
+    <div class="mb-3">
+      <label>Mật khẩu</label>
+      <input type="password" class="form-control" name="password" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Chọn quyền</label>
+      <select name="roleIds" multiple class="form-select">
+        <option th:each="r : ${roles}" th:value="${r.id}" th:text="${r.name}"></option>
+      </select>
+    </div>
+
+    <button class="btn btn-success">Tạo user</button>
+
+  </form>
+
+
+</section>
+
+</html>

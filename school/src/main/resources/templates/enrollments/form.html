@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Đăng ký lớp học')}">
+
+<section>
+
+  <h4>Thêm đăng ký lớp học</h4>
+
+  <form th:action="@{/enrollments/create}" th:object="${enrollment}" method="post">
+
+    <div class="mb-3">
+      <label class="form-label">Học viên</label>
+      <select th:field="*{student.id}" class="form-select" required>
+        <option value="">-- Chọn học viên --</option>
+        <option th:each="s : ${students}"
+                th:value="${s.id}"
+                th:text="${s.fullName}">
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Lớp học</label>
+      <select th:field="*{courseClass.id}" class="form-select" required>
+        <option value="">-- Chọn lớp --</option>
+        <option th:each="c : ${classes}"
+                th:value="${c.id}"
+                th:text="${c.classCode}">
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Ngày đăng ký</label>
+      <input type="date" th:field="*{enrolledDate}" class="form-control">
+    </div>
+
+    <button class="btn btn-success">Save</button>
+
+    <a th:href="@{/enrollments}" class="btn btn-secondary">
+      Back
+    </a>
+
+  </form>
+
+</section>
+
+</html>

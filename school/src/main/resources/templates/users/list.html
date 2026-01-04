@@ -1,0 +1,37 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Users')}">
+
+<section>
+
+  <h4>Danh sách User</h4>
+
+  <a href="/users/create" class="btn btn-primary mb-3">➕ Tạo user</a>
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Enabled</th>
+      <th>Roles</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="u : ${users}">
+      <td th:text="${u.id}"></td>
+      <td th:text="${u.username}"></td>
+      <td th:text="${u.enabled}"></td>
+      <td>
+                <span th:each="r : ${u.roles}"
+                      th:text="${r.name}"
+                      class="badge bg-secondary me-1"></span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</section>
+
+</html>

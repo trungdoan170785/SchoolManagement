@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" th:href="@{/adminlte/dist/css/adminlte.css}">
+</head>
+
+<body class="login-page">
+
+<div class="login-box">
+
+  <div class="card card-outline card-primary">
+    <div class="card-header">
+      <h3 class="text-center">School Admin</h3>
+    </div>
+
+    <div class="card-body">
+
+      <form method="post" th:action="@{/login}">
+
+        <div class="mb-3">
+          <input class="form-control" name="username" placeholder="Username" required>
+        </div>
+
+        <div class="mb-3">
+          <input class="form-control" type="password" name="password" placeholder="Password" required>
+        </div>
+
+        <button class="btn btn-primary w-100">Login</button>
+
+        <div class="mt-2 text-danger" th:if="${param.error}">
+          Sai tài khoản hoặc mật khẩu
+        </div>
+
+        <div class="mt-2 text-success" th:if="${param.logout}">
+          Bạn đã đăng xuất
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

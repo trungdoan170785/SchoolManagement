@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Học phí')}">
+
+<section>
+
+  <div class="d-flex justify-content-between mb-3">
+    <h4>Danh sách thanh toán</h4>
+
+    <a class="btn btn-primary" th:href="@{/payments/create}">
+      Thêm thanh toán
+    </a>
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Học viên</th>
+      <th>Số tiền</th>
+      <th>Ngày đóng</th>
+      <th>Phương thức</th>
+      <th>Ghi chú</th>
+      <th>Thao tác</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="p : ${payments}">
+      <td th:text="${p.student.fullName}"></td>
+      <td th:text="${#numbers.formatDecimal(p.amount,0,'COMMA',0,'POINT')}"></td>
+      <td th:text="${p.paidDate}"></td>
+      <td th:text="${p.method}"></td>
+      <td th:text="${p.note}"></td>
+
+      <td>
+        <a class="btn btn-sm btn-warning"
+           th:href="@{'/payments/edit/' + ${p.id}}">
+          Sửa
+        </a>
+
+        <a class="btn btn-sm btn-danger"
+           th:href="@{'/payments/delete/' + ${p.id}}"
+           onclick="return confirm('Xoá thanh toán này?')">
+          Xoá
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</section>
+
+</html>

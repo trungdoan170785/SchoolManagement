@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/base :: base(~{::section}, 'Học viên')">
+
+<section>
+
+  <div class="d-flex justify-content-between mb-3">
+    <h4>Danh sách học viên</h4>
+
+    <a class="btn btn-primary" th:href="@{/students/create}">
+      + Thêm học viên
+    </a>
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Mã</th>
+      <th>Họ tên</th>
+      <th>Giới tính</th>
+      <th>Ngày sinh</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th width="140">Hành động</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="s : ${students}">
+      <td th:text="${s.studentCode}"></td>
+      <td th:text="${s.fullName}"></td>
+      <td th:text="${s.gender}"></td>
+      <td th:text="${s.dob}"></td>
+      <td th:text="${s.email}"></td>
+      <td th:text="${s.phone}"></td>
+
+      <td>
+        <a class="btn btn-sm btn-warning"
+           th:href="@{'/students/edit/' + ${s.id}}">
+          Sửa
+        </a>
+
+        <a class="btn btn-sm btn-danger"
+           th:href="@{'/students/delete/' + ${s.id}}"
+           onclick="return confirm('Xóa học viên này?')">
+          Xóa
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</section>
+
+</html>

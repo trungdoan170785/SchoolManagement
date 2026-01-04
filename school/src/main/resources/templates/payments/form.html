@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Thanh toán')}">
+
+<section>
+
+  <h4 th:text="${payment.id == null ? 'Thêm thanh toán' : 'Cập nhật thanh toán'}"></h4>
+
+  <form method="post"
+        th:action="@{${payment.id == null ? '/payments/create' : '/payments/edit/' + payment.id}}"
+        th:object="${payment}">
+
+    <div class="mb-3">
+      <label class="form-label">Học viên</label>
+      <select class="form-select" th:field="*{student}" required>
+        <option value="">-- Chọn học viên --</option>
+        <option th:each="s : ${students}"
+                th:value="${s.id}"
+                th:text="${s.fullName}">
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Số tiền</label>
+      <input type="number" step="1000" class="form-control" th:field="*{amount}" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Ngày đóng</label>
+      <input type="date" class="form-control" th:field="*{paidDate}" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Phương thức</label>
+      <input type="text" class="form-control" th:field="*{method}">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Ghi chú</label>
+      <textarea class="form-control" th:field="*{note}"></textarea>
+    </div>
+
+    <button class="btn btn-success">Lưu</button>
+    <a class="btn btn-secondary" th:href="@{/payments}">Quay lại</a>
+
+  </form>
+
+</section>
+
+</html>

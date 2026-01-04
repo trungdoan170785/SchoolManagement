@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Giáo viên')}">
+
+<section>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4>Danh sách giáo viên</h4>
+
+    <a th:href="@{/teachers/create}" class="btn btn-primary">
+      <i class="fas fa-plus"></i> Thêm giáo viên
+    </a>
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Họ tên</th>
+      <th>Email</th>
+      <th>SĐT</th>
+      <th>Chuyên môn</th>
+      <th>Hành động</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="t : ${teachers}">
+      <td th:text="${t.id}"></td>
+      <td th:text="${t.fullName}"></td>
+      <td th:text="${t.email}"></td>
+      <td th:text="${t.phone}"></td>
+      <td th:text="${t.specialization}"></td>
+
+      <td>
+        <a th:href="@{'/teachers/edit/' + ${t.id}}"
+           class="btn btn-warning btn-sm">
+          <b class="fas fa-edit">Edit</b>
+        </a>
+
+        <a th:href="@{'/teachers/delete/' + ${t.id}}"
+           class="btn btn-danger btn-sm"
+           onclick="return confirm('Xóa giáo viên này?');">
+          <b class="fas fa-trash">Delete</b>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</section>
+
+</html>

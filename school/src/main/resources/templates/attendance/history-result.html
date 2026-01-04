@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Kết quả điểm danh')}">
+
+<section>
+
+  <h4>
+    Lịch sử điểm danh —
+    <span th:text="${classInfo.classCode}"></span>
+    — ngày <span th:text="${date}"></span>
+  </h4>
+
+  <table class="table table-bordered mt-3">
+
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Học viên</th>
+      <th>Trạng thái</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr th:each="r, iStat : ${records}">
+      <td th:text="${iStat.index + 1}"></td>
+      <td th:text="${r.student.fullName}"></td>
+      <td>
+        <span class="badge bg-success" th:if="${r.status.name() == 'PRESENT'}">Có mặt</span>
+        <span class="badge bg-danger" th:if="${r.status.name() == 'ABSENT'}">Vắng</span>
+        <span class="badge bg-warning" th:if="${r.status.name() == 'LATE'}">Muộn</span>
+        <span class="badge bg-info" th:if="${r.status.name() == 'EXCUSED'}">Nghỉ phép</span>
+      </td>
+    </tr>
+
+    </tbody>
+
+  </table>
+
+  <a th:href="@{/attendance/history}" class="btn btn-secondary mt-2">
+    Quay lại
+  </a>
+
+</section>
+
+</html>

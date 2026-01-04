@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Điểm danh lớp')}">
+
+<section>
+
+  <h4>
+    Điểm danh lớp:
+    <span th:text="${classInfo.classCode}"></span>
+    — Ngày: <span th:text="${today}"></span>
+  </h4>
+
+  <form th:action="@{'/attendance/class/' + ${classInfo.id}}" method="post">
+
+    <table class="table table-bordered">
+
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Học viên</th>
+        <th>Có mặt</th>
+        <th>Vắng</th>
+        <th>Muộn</th>
+        <th>Nghỉ phép</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <tr th:each="s, iStat : ${students}">
+
+        <td th:text="${iStat.index + 1}"></td>
+
+        <td th:text="${s.fullName}"></td>
+
+        <!-- Student Id -->
+        <input type="hidden"
+               th:name="${'records[' + iStat.index + '].studentId'}"
+               th:value="${s.id}"/>
+
+        <!-- PRESENT -->
+        <td>
+          <input type="radio"
+                 th:name="${'records[' + iStat.index + '].status'}"
+                 value="PRESENT"
+                 th:checked="${statusMap[s.id] == T(com.school.entity.Attendance.Status).PRESENT
+                        or statusMap[s.id] == null}">
+        </td>
+
+        <!-- ABSENT -->
+        <td>
+          <input type="radio"
+                 th:name="${'records[' + iStat.index + '].status'}"
+                 value="ABSENT"
+                 th:checked="${statusMap[s.id] == T(com.school.entity.Attendance.Status).ABSENT}">
+        </td>
+
+        <!-- LATE -->
+        <td>
+          <input type="radio"
+                 th:name="${'records[' + iStat.index + '].status'}"
+                 value="LATE"
+                 th:checked="${statusMap[s.id] == T(com.school.entity.Attendance.Status).LATE}">
+        </td>
+
+        <!-- EXCUSED -->
+        <td>
+          <input type="radio"
+                 th:name="${'records[' + iStat.index + '].status'}"
+                 value="EXCUSED"
+                 th:checked="${statusMap[s.id] == T(com.school.entity.Attendance.Status).EXCUSED}">
+        </td>
+
+      </tr>
+
+      </tbody>
+
+    </table>
+
+    <button class="btn btn-success mt-3">Lưu điểm danh</button>
+    <a th:href="@{/attendance}" class="btn btn-secondary mt-3">Quay lại</a>
+
+  </form>
+
+</section>
+
+</html>

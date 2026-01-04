@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:fragment="base(content, title)">
+
+<head th:replace="~{layout/fragments-header :: header(${title})}"></head>
+
+<body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary">
+
+<div class="app-wrapper">
+
+    <!-- Header -->
+    <nav class="app-header navbar navbar-expand bg-body"
+         th:replace="~{layout/fragments-navbar :: nav}">
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="app-sidebar bg-body-secondary shadow"
+           data-bs-theme="dark"
+           th:replace="~{layout/fragments-sidebar :: slidebar}">
+    </aside>
+
+    <!-- Main -->
+    <main class="app-main">
+
+        <!-- Content Header -->
+        <div class="app-content-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h3 class="mb-0" th:text="${title}"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- App Content -->
+        <div class="app-content">
+            <div class="container-fluid">
+
+                <!-- 🔥 TRANG CON SẼ ĐƯỢC CHÈN VÀO ĐÂY -->
+                <div th:replace="${content}"></div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer th:replace="~{layout/fragments-footer :: footer}">
+    </footer>
+
+</div>
+
+<!-- Base JS -->
+<th:block th:replace="~{layout/basejs :: base}"></th:block>
+
+</body>
+</html>

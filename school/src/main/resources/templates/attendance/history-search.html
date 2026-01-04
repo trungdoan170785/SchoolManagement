@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Lịch sử điểm danh')}">
+
+<section>
+
+  <h4>Xem lịch sử điểm danh</h4>
+
+  <form th:action="@{/attendance/history}" method="get">
+
+    <!-- Khi đã biết class -->
+    <div th:if="${selectedClass != null}">
+      <label class="form-label">Lớp đang xem</label>
+
+      <!-- disable input -->
+      <input type="text"
+             class="form-control"
+             th:value="${selectedClass.classCode}"
+             disabled>
+
+      <!-- hidden để submit -->
+      <input type="hidden" name="classId" th:value="${selectedClass.id}">
+    </div>
+
+    <!-- Khi chưa chọn class -->
+    <div th:if="${selectedClass == null}">
+      <label class="form-label">Chọn lớp</label>
+
+      <select name="classId" class="form-select" required>
+        <option value="">-- Chọn lớp --</option>
+        <option th:each="c: ${classes}"
+                th:value="${c.id}"
+                th:text="${c.classCode}">
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3 mt-3">
+      <label class="form-label">Chọn ngày</label>
+      <input type="date" name="date" class="form-control" required>
+    </div>
+
+    <button class="btn btn-primary">Xem lịch sử</button>
+  </form>
+
+
+
+</section>
+
+</html>

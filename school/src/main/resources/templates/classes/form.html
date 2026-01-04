@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/base :: base(~{::section}, 'Lớp học')">
+
+<section>
+
+    <form th:action="@{/classes/save}" th:object="${courseClass}" method="post">
+
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="mb-3">
+            <div class="col-md-4">
+                <label>Mã lớp</label>
+                <input type="text" class="form-control" th:field="*{classCode}" required>
+
+                <div class="mb-3">
+                <label>Ngày bắt đầu</label>
+                <input type="date" class="form-control" th:field="*{startDate}">
+            </div>
+
+                <div class="mb-3">
+                <label>Ngày kết thúc</label>
+                <input type="date" class="form-control" th:field="*{endDate}">
+            </div>
+        </div>
+
+
+        <div class="mb-3">
+
+            <div class="mb-3">
+                <label>Khóa học</label>
+                <select class="form-select" th:field="*{course}">
+                    <option th:each="c : ${courses}"
+                            th:value="${c.id}"
+                            th:text="${c.name}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label>Giáo viên phụ trách</label>
+                <select class="form-select" th:field="*{teacher}">
+                    <option value="">-- Chưa phân công --</option>
+                    <option th:each="t : ${teachers}"
+                            th:value="${t.id}"
+                            th:text="${t.fullName}">
+                    </option>
+                </select>
+            </div>
+
+        <button class="btn btn-success">Lưu</button>
+        <a th:href="@{/classes}" class="btn btn-secondary">Hủy</a>
+
+    </form>
+
+</section>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Thông báo')}">
+
+<section>
+
+  <div class="d-flex justify-content-between mb-3">
+    <h4>Danh sách thông báo</h4>
+
+    <a class="btn btn-primary" th:href="@{/notifications/create}">
+      Tạo thông báo
+    </a>
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Tiêu đề</th>
+      <th>Ngày tạo</th>
+      <th>Người gửi</th>
+      <th>Thao tác</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="n : ${notifications}">
+      <td th:text="${n.title}"></td>
+      <td th:text="${#temporals.format(n.createdAt, 'dd/MM/yyyy HH:mm')}"></td>
+      <td th:text="${n.sender != null ? n.sender.username : 'Hệ thống'}"></td>
+
+      <td>
+        <a class="btn btn-sm btn-warning"
+           th:href="@{'/notifications/edit/' + ${n.id}}">
+          Sửa
+        </a>
+
+        <a class="btn btn-sm btn-danger"
+           th:href="@{'/notifications/delete/' + ${n.id}}"
+           onclick="return confirm('Xoá thông báo?')">
+          Xoá
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</section>
+
+</html>

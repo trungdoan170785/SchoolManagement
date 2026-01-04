@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Lớp học')}">
+
+<section>
+
+  <div class="d-flex justify-content-between mb-3">
+    <h4>Danh sách lớp học</h4>
+
+    <a class="btn btn-primary" th:href="@{/classes/create}">
+      + Tạo lớp học
+    </a>
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Mã lớp</th>
+      <th>Khóa học</th>
+      <th>Giáo viên</th>
+      <th>Ngày bắt đầu</th>
+      <th>Ngày kết thúc</th>
+      <th>Sĩ số</th>
+      <th width="140">Hành động</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="c : ${classes}">
+      <td th:text="${c.classCode}"></td>
+
+      <td th:text="${c.course != null ? c.course.name : ''}"></td>
+
+      <td th:text="${c.teacher != null ? c.teacher.fullName : 'Chưa phân công'}"></td>
+
+      <td th:text="${c.startDate}"></td>
+
+      <td th:text="${c.endDate}"></td>
+
+      <td th:text="${c.enrollments != null ? c.enrollments.size() : 0}"></td>
+
+      <td>
+        <a class="btn btn-sm btn-warning"
+           th:href="@{'/classes/edit/' + ${c.id}}">
+          Sửa
+        </a>
+
+        <a class="btn btn-sm btn-danger"
+           th:href="@{'/classes/delete/' + ${c.id}}"
+           onclick="return confirm('Xóa lớp học?')">
+          Xóa
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</section>
+
+</html>

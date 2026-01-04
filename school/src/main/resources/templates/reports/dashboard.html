@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Dashboard')}">
+
+<section>
+
+  <div class="row">
+
+    <div class="col-md-3">
+      <div class="small-box bg-primary">
+        <div class="inner">
+          <h3 th:text="${students}">0</h3>
+          <p>Học viên</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3 th:text="${teachers}">0</h3>
+          <p>Giáo viên</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="small-box bg-warning">
+        <div class="inner">
+          <h3 th:text="${classes}">0</h3>
+          <p>Lớp học</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="small-box bg-danger">
+        <div class="inner">
+          <h3 th:text="${courses}">0</h3>
+          <p>Khóa học</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <h5>Doanh thu tháng này</h5>
+  <h3 th:text="${#numbers.formatDecimal(revenue,0,'COMMA',0,'POINT')} + ' VND'"></h3>
+
+  <hr>
+
+  <h5>Điểm danh hôm nay</h5>
+
+  <ul>
+    <li>Present: <span th:text="${present}"></span>
+    <li>Absent: <span th:text="${absent}"></span>
+    <li>Late: <span th:text="${late}"></span>
+    <li>EXCUSED: <span th:text="${excused}"></span>
+
+  </ul>
+
+  <hr>
+
+  <h5>Top khóa học</h5>
+
+  <table class="table table-bordered">
+    <tr>
+      <th>Khóa học</th>
+      <th>Số lớp</th>
+    </tr>
+
+    <tr th:each="t : ${topCourses}">
+      <td th:text="${t.key}"></td>
+      <td th:text="${t.value}"></td>
+    </tr>
+  </table>
+
+  <hr>
+
+  <h5>Thông báo gần đây</h5>
+
+  <ul>
+    <li th:each="n : ${notifications}"
+        th:text="${n.title}">
+    </li>
+  </ul>
+
+</section>
+
+</html>

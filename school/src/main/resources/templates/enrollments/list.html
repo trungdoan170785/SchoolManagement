@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Đăng ký lớp học')}">
+
+<section>
+
+  <div class="d-flex justify-content-between mb-3">
+    <h4>Danh sách đăng ký</h4>
+
+    <a class="btn btn-primary" th:href="@{/enrollments/create}">
+      Thêm đăng ký
+    </a>
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Học viên</th>
+      <th>Lớp học</th>
+      <th>Ngày đăng ký</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="e, i : ${enrollments}">
+      <td th:text="${i.index + 1}"></td>
+      <td th:text="${e.student.fullName}"></td>
+      <td th:text="${e.courseClass.classCode}"></td>
+      <td th:text="${e.enrolledDate}"></td>
+
+      <td>
+        <a th:href="@{'/enrollments/delete/' + ${e.id}}"
+           onclick="return confirm('Xoá đăng ký này?')"
+           class="btn btn-danger btn-sm">
+          Delete
+        </a>
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+
+</section>
+
+</html>

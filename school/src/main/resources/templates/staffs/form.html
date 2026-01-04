@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Nhân viên')}">
+
+<section>
+  <h4 th:text="${staff.id == null ? 'Thêm nhân sự' : 'Cập nhật nhân sự'}"></h4>
+  <form th:action="@{/staffs/save}" th:object="${staff}" method="post">
+
+    <input type="hidden" th:field="*{id}"/>
+
+    <div class="mb-3">
+        <label>Họ tên</label>
+        <input type="text" class="form-control" th:field="*{fullName}" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Email</label>
+        <input type="email" class="form-control" th:field="*{email}">
+    </div>
+
+    <div class="mb-3">
+        <label>Số điện thoại</label>
+        <input type="text" class="form-control" th:field="*{phone}">
+    </div>
+
+    <div class="mb-3">
+        <label>Vị trí công việc</label>
+        <input type="text" class="form-control" th:field="*{position}">
+    </div>
+
+
+    <button type="submit" class="btn btn-success">
+      Save
+    </button>
+
+    <a th:href="@{/staffs}" class="btn btn-secondary">
+      Back
+    </a>
+
+  </form>
+
+</section>
+
+</html>

@@ -1,0 +1,21 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Users')}">
+
+<section>
+  <h4>Chọn người dùng cần tạo tài khoản:</h4>
+  <form method="get" action="/users/search-result">
+
+    <div class="mb-3">
+      <label>Nhập tên hoặc email</label>
+      <input name="keyword" class="form-control" required>
+    </div>
+
+    <button class="btn btn-primary">Tìm kiếm</button>
+
+  </form>
+
+
+</section>
+
+</html>

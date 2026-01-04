@@ -1,0 +1,55 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: base(~{::section}, 'Users')}">
+
+<section>
+    <h5>Kết quả tìm kiếm</h5>
+
+    <table class="table">
+        <tr>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Loại</th>
+            <th></th>
+        </tr>
+
+        <tr th:each="t : ${teachers}">
+            <td th:text="${t.fullName}"></td>
+            <td th:text="${t.email}"></td>
+            <td>Teacher</td>
+
+            <td>
+                <a th:href="@{'/users/create-from-email?email=' + ${t.email}}"
+                   class="btn btn-success btn-sm">Tạo user</a>
+            </td>
+        </tr>
+
+        <tr th:each="s : ${students}">
+            <td th:text="${s.fullName}"></td>
+            <td th:text="${s.email}"></td>
+            <td>Student</td>
+
+            <td>
+                <a th:href="@{'/users/create-from-email?email=' + ${s.email}}"
+                   class="btn btn-success btn-sm">Tạo user</a>
+            </td>
+        </tr>
+
+        <tr th:each="st : ${staffs}">
+            <td th:text="${st.fullName}"></td>
+            <td th:text="${st.email}"></td>
+            <td>Staff</td>
+
+            <td>
+                <a th:href="@{'/users/create-from-email?email=' + ${st.email}}"
+                   class="btn btn-success btn-sm">Tạo user</a>
+            </td>
+        </tr>
+
+    </table>
+
+
+
+</section>
+
+</html>
